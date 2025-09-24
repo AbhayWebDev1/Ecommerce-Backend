@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from  'cors';
 import bodyParser from 'body-parser';
 const app = express();
-const port = 8000;
+// const port = 8000;
 
 import Connection from './database/db.js';
 import DefaultData from './default.js';
@@ -15,14 +15,15 @@ app.use(bodyParser.urlencoded({ extended : true }));
 app.use('/', Routes);
 
 dotenv.config();
+
 const USERNAME =process.env.DB_USERNAME;
 const PASSWORD =process.env.DB_PASSWORD;
-
+const PORT = process.env.PORT_NO || 8000;
 
 Connection(USERNAME, PASSWORD);
 
-app.listen(port,() =>
-   console.log(`Server is running on localhost: ${port}`)
+app.listen(PORT,() =>
+   console.log(`Server is running on localhost: ${PORT}`)
 );
 
 DefaultData();
